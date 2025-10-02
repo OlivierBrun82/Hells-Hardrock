@@ -1,0 +1,19 @@
+{# 
+    Formulaire d'emprunt d'un média.
+    Ce template suppose que la variable 'form' est passée à la vue,
+    typiquement via le contrôleur MediaController::borrow().
+#}
+
+<form method="post">
+    <div class="mb-3">
+        {{ form_label(form.Borrower) }}
+        {{ form_widget(form.Borrower, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.Borrower) }}
+    </div>
+    <button class="btn btn-primary" type="submit">
+        Emprunter
+    </button>
+</form>
+
+
+

@@ -1,0 +1,81 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Emprunter {{ medium.Title }}{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="mb-0">
+                        <i class="fas fa-music"></i> Emprunter un média
+                    </h2>
+                </div>
+                <div class="card-body">
+                    <!-- Informations du média -->
+                    <div class="mb-4">
+                        <h4>Détails du média</h4>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p><strong>Titre :</strong> {{ medium.Title }}</p>
+                                <p><strong>Groupe :</strong> {{ medium.GroupName }}</p>
+                                <p><strong>Style :</strong> {{ medium.Style }}</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p><strong>Année :</strong> {{ medium.Year }}</p>
+                                <p><strong>Support :</strong> {{ medium.Medium }}</p>
+                                <p><strong>Propriétaire :</strong> {{ medium.Owner.FirstName }} {{ medium.Owner.LastName }}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Statut d'emprunt -->
+                    {% if medium.Borrower %}
+                        <div class="alert alert-warning">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            Ce média est actuellement emprunté par {{ medium.Borrower.FirstName }} {{ medium.Borrower.LastName }}
+                        </div>
+                    {% else %}
+                        <div class="alert alert-success">
+                            <i class="fas fa-check-circle"></i>
+                            Ce média est disponible à l'emprunt
+                        </div>
+                    {% endif %}
+
+                    <!-- Formulaire d'emprunt -->
+                    <div class="mt-4">
+                        {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+                        
+                        <div class="mb-3">
+                            {{ form_label(form.Borrower, 'Sélectionner l\'emprunteur', {'label_attr': {'class': 'form-label'}}) }}
+                            {{ form_widget(form.Borrower, {'attr': {'class': 'form-select'}}) }}
+                            {{ form_errors(form.Borrower) }}
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+                            <a href="{{ path('app_media_show', {'id': medium.id}) }}" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left"></i> Retour au média
+                            </a>
+                            
+                            <div>
+                                {% if medium.Borrower %}
+                                    <button type="submit" class="btn btn-warning">
+                                        <i class="fas fa-exchange-alt"></i> Changer d'emprunteur
+                                    </button>
+                                {% else %}
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="fas fa-hand-holding"></i> Emprunter
+                                    </button>
+                                {% endif %}
+                            </div>
+                        </div>
+                        
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
