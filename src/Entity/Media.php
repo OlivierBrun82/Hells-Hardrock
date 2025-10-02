@@ -28,6 +28,17 @@ class Media
     #[ORM\Column(length: 255)]
     private ?string $Medium = null;
 
+<<<<<<< HEAD
+=======
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $Owner = null;
+
+    #[ORM\ManyToOne]
+    private ?User $Borrower = null;
+
+
+>>>>>>> ae0bd650135ced138897ea92cfe1438455b77bd2
     public function getId(): ?int
     {
         return $this->id;
