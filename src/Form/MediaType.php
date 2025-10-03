@@ -27,6 +27,7 @@ class MediaType extends AbstractType
                 'mapped'=> false,
                 // 'contraints'=>   
             ])
+
         ;
     }
 
