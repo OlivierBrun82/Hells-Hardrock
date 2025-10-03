@@ -1,3 +1,44 @@
+/* ========================================
+   METALVAULT - ROCK THEME CSS
+   ======================================== */
+
+/* ===== VARIABLES CSS ===== */
+:root {
+    /* Couleurs principales */
+    --primary-red: #dc2626;
+    --dark-red: #991b1b;
+    --light-red: #fca5a5;
+    --accent-red: #ef4444;
+    
+    /* Couleurs sombres */
+    --dark-bg: #0f0f0f;
+    --darker-bg: #000000;
+    --card-bg: #1a1a1a;
+    --border-dark: #333333;
+    
+    /* Couleurs de texte */
+    --text-primary: #ffffff;
+    --text-secondary: #d1d5db;
+    --text-muted: #9ca3af;
+    
+    /* Effets */
+    --shadow-red: 0 0 20px rgba(220, 38, 38, 0.3);
+    --shadow-dark: 0 4px 6px rgba(0, 0, 0, 0.5);
+    --gradient-red: linear-gradient(135deg, #dc2626, #991b1b);
+    --gradient-dark: linear-gradient(135deg, #1a1a1a, #0f0f0f);
+    
+    /* Typographie */
+    --font-primary: 'Arial Black', 'Helvetica', sans-serif;
+    --font-secondary: 'Arial', sans-serif;
+}
+
+/* ===== RESET ET BASE ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
     background-color: #0c0c0c;
     color: #f5f5f5;
