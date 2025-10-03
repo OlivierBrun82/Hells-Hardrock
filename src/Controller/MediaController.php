@@ -4,7 +4,9 @@ namespace App\Controller;
 
 use App\Entity\Media;
 use App\Form\MediaType;
+use App\Form\BorrowType;
 use App\Repository\MediaRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -34,6 +36,17 @@ class MediaController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // vérifier si l'utilisateur est connecté
+            $user = $this->getUser();
+            if ($user) {
+                $medium->setOwner($user);
+                // si il n'est pas connecté le redirige sur la page de connexion
+            } else {
+                $this->addFlash('error', 'Vous devez être connecté pour créer un média');
+                return $this->redirectToRoute('app_login');
+            }
+            //  dd($user);
+
             $entityManager->persist($medium);
             $entityManager->flush();
 
@@ -69,6 +82,35 @@ class MediaController extends AbstractController
         }
 
         return $this->render('media/edit.html.twig', [
+            'medium' => $medium,
+            'form' => $form,
+        ]);
+    }
+
+    #[Route('/{id}/borrow', name: 'app_media_borrow', methods: ['GET', 'POST'])]
+    public function borrow(Request $request, Media $medium, EntityManagerInterface $entityManager): Response
+    {
+        // Vérifier que l'utilisateur est connecté
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        
+        $form = $this->createForm(BorrowType::class, $medium);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Ajouter un message de succès
+            $borrower = $medium->getBorrower();
+            if ($borrower) {
+                $this->addFlash('success', 'Le média a été emprunté avec succès par ' . $borrower->getFirstName() . ' ' . $borrower->getLastName() . ' !');
+            } else {
+                $this->addFlash('success', 'L\'emprunt a été annulé avec succès !');
+            }
+            
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_media_show', ['id' => $medium->getId()], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('media/borrow.html.twig', [
             'medium' => $medium,
             'form' => $form,
         ]);
