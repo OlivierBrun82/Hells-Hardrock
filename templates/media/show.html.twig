@@ -1,42 +1,76 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Media{% endblock %}
+{% block title %}{{ medium.Title }} - {{ medium.GroupName }}{% endblock %}
 
 {% block body %}
-    <h1>Media</h1>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>🎸 {{ medium.Title }}</h1>
+        <div class="d-flex gap-2">
+            <a href="{{ path('app_media_index') }}" class="btn btn-secondary">← Retour à la collection</a>
+            <a href="{{ path('app_media_edit', {'id': medium.id}) }}" class="btn btn-primary">✏️ Modifier</a>
+        </div>
+    </div>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ medium.id }}</td>
-            </tr>
-            <tr>
-                <th>Title</th>
-                <td>{{ medium.Title }}</td>
-            </tr>
-            <tr>
-                <th>GroupName</th>
-                <td>{{ medium.GroupName }}</td>
-            </tr>
-            <tr>
-                <th>Style</th>
-                <td>{{ medium.Style }}</td>
-            </tr>
-            <tr>
-                <th>Year</th>
-                <td>{{ medium.Year }}</td>
-            </tr>
-            <tr>
-                <th>Medium</th>
-                <td>{{ medium.Medium }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="card rock-border">
+        <div class="card-header">
+            <h2 class="card-title">{{ medium.GroupName }}</h2>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <table class="table" style="background: transparent; box-shadow: none; margin: 0;">
+                        <tbody>
+                            <tr>
+                                <th style="color: var(--accent-red); border: none; padding: 0.5rem 0;">Titre :</th>
+                                <td style="border: none; padding: 0.5rem 0; color: var(--text-primary); font-weight: bold;">{{ medium.Title }}</td>
+                            </tr>
+                            <tr>
+                                <th style="color: var(--accent-red); border: none; padding: 0.5rem 0;">Groupe :</th>
+                                <td style="border: none; padding: 0.5rem 0; color: var(--text-primary);">{{ medium.GroupName }}</td>
+                            </tr>
+                            <tr>
+                                <th style="color: var(--accent-red); border: none; padding: 0.5rem 0;">Style :</th>
+                                <td style="border: none; padding: 0.5rem 0;">
+                                    <span class="badge" style="background: var(--primary-red); color: white; padding: 0.25rem 0.5rem; border-radius: 3px;">
+                                        {{ medium.Style }}
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-6">
+                    <table class="table" style="background: transparent; box-shadow: none; margin: 0;">
+                        <tbody>
+                            <tr>
+                                <th style="color: var(--accent-red); border: none; padding: 0.5rem 0;">Année :</th>
+                                <td style="border: none; padding: 0.5rem 0; color: var(--text-primary);">{{ medium.Year }}</td>
+                            </tr>
+                            <tr>
+                                <th style="color: var(--accent-red); border: none; padding: 0.5rem 0;">Support :</th>
+                                <td style="border: none; padding: 0.5rem 0; color: var(--text-primary);">{{ medium.Medium }}</td>
+                            </tr>
+                            <tr>
+                                <th style="color: var(--accent-red); border: none; padding: 0.5rem 0;">Propriétaire :</th>
+                                <td style="border: none; padding: 0.5rem 0; color: var(--text-primary);">
+                                    {% if medium.Owner %}
+                                        {{ medium.Owner.FirstName }} {{ medium.Owner.LastName }}
+                                    {% else %}
+                                        Non défini
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <a href="{{ path('app_media_index') }}">back to list</a>
-
-    <a href="{{ path('app_media_edit', {'id': medium.id}) }}">edit</a>
-
-    {{ include('media/_delete_form.html.twig') }}
+    <div class="mt-4 text-center">
+        <div class="d-flex justify-content-center gap-3">
+            <a href="{{ path('app_media_edit', {'id': medium.id}) }}" class="btn btn-primary">✏️ Modifier ce média</a>
+            {{ include('media/_delete_form.html.twig') }}
+        </div>
+    </div>
 {% endblock %}

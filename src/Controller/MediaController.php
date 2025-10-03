@@ -11,10 +11,15 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/media')]
 final class MediaController extends AbstractController
 {
-    #[Route(name: 'app_media_index', methods: ['GET'])]
+    #[Route('/', name: 'app_home', methods: ['GET'])]
+    public function home(): Response
+    {
+        return $this->render('home.html.twig');
+    }
+
+    #[Route('/media', name: 'app_media_index', methods: ['GET'])]
     public function index(MediaRepository $mediaRepository): Response
     {
         return $this->render('media/index.html.twig', [
