@@ -13,7 +13,7 @@ final class HomeController extends AbstractController
     {
         // --- Page D'accueil ---
         return $this->render('home/index.html.twig', [
-            'page_title' => 'Bienvenue sur Hells Hardrock !',
+            'page_title' => 'accueil',
         ]);
     }
 }
