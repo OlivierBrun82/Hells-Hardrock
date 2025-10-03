@@ -14,6 +14,8 @@
                 <th>Style</th>
                 <th>Year</th>
                 <th>Medium</th>
+                <th>Propriétaire</th>
+                <th>Emprunteur</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -26,18 +28,33 @@
                 <td>{{ medium.Style }}</td>
                 <td>{{ medium.Year }}</td>
                 <td>{{ medium.Medium }}</td>
+                <td>{{ medium.Owner.FirstName }} {{ medium.Owner.LastName }}</td>
                 <td>
-                    <a href="{{ path('app_media_show', {'id': medium.id}) }}">show</a>
-                    <a href="{{ path('app_media_edit', {'id': medium.id}) }}">edit</a>
+                    {% if medium.Borrower %}
+                        <span class="badge bg-warning">{{ medium.Borrower.FirstName }} {{ medium.Borrower.LastName }}</span>
+                    {% else %}
+                        <span class="badge bg-success">Disponible</span>
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="{{ path('app_media_show', {'id': medium.id}) }}" class="btn btn-sm btn-outline-primary">Voir</a>
+                    <a href="{{ path('app_media_edit', {'id': medium.id}) }}" class="btn btn-sm btn-outline-warning">Modifier</a>
+                    <a href="{{ path('app_media_borrow', {'id': medium.id}) }}" class="btn btn-sm btn-outline-info">
+                        {% if medium.Borrower %}
+                            Gérer
+                        {% else %}
+                            Emprunter
+                        {% endif %}
+                    </a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="7">no records found</td>
+                <td colspan="9">no records found</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_media_new') }}">Create new</a>
+    <a href="{{ path('app_media_new') }}" class="btn btn-primary">Créer un nouveau média</a>
 {% endblock %}
