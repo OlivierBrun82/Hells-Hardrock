@@ -32,6 +32,9 @@ final class MediaController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $user = $this->getUser();
+            // dd($medium, $user);
+
             $entityManager->persist($medium);
             $entityManager->flush();
 
