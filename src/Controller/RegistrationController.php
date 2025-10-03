@@ -21,7 +21,7 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // encode the plain password
+            // Encoder le mot de passe
             $user->setPassword(
                 $userPasswordHasher->hashPassword(
                     $user,
@@ -29,11 +29,15 @@ class RegistrationController extends AbstractController
                 )
             );
 
+            // Sauvegarder en base
             $entityManager->persist($user);
             $entityManager->flush();
-            // do anything else you need here, like send an email
 
-            return $this->redirectToRoute('app_media_index');
+            // Connecter automatiquement l'utilisateur
+            $this->addFlash('success', 'Compte créé avec succès ! Vous êtes maintenant connecté.');
+            
+            // Rediriger vers la page de connexion pour qu'il se connecte
+            return $this->redirectToRoute('app_login');
         }
 
         return $this->render('registration/register.html.twig', [

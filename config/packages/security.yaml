@@ -16,6 +16,8 @@ security:
         main:
             lazy: true
             provider: app_user_provider
+            custom_authenticators:
+                - App\Security\AppCustomAuthenticator
 
             logout:
                 path: app_logout       # correspond à ta route #[Route('/logout', name: 'app_logout')]

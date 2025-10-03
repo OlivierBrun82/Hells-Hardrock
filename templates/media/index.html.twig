@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hells Hardrock - Collection{% endblock %}
+{% block title %}MetalVault - Collection{% endblock %}
 
 {% block body %}
     <h1>Media index</h1>
@@ -8,21 +8,19 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>GroupName</th>
+                <th>Titre</th>
+                <th>Groupe</th>
                 <th>Style</th>
-                <th>Year</th>
-                <th>Medium</th>
+                <th>Année</th>
+                <th>Support</th>
                 <th>Propriétaire</th>
                 <th>Emprunteur</th>
-                <th>actions</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for medium in media %}
             <tr>
-                <td>{{ medium.id }}</td>
                 <td>{{ medium.Title }}</td>
                 <td>{{ medium.GroupName }}</td>
                 <td>{{ medium.Style }}</td>
@@ -50,7 +48,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="9">no records found</td>
+                <td colspan="8">Aucun enregistrement trouvé</td>
             </tr>
         {% endfor %}
         </tbody>
