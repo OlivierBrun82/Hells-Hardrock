@@ -50,16 +50,6 @@
                                 <th style="color: var(--accent-red); border: none; padding: 0.5rem 0;">Support :</th>
                                 <td style="border: none; padding: 0.5rem 0; color: var(--text-primary);">{{ medium.Medium }}</td>
                             </tr>
-                            <tr>
-                                <th style="color: var(--accent-red); border: none; padding: 0.5rem 0;">Propriétaire :</th>
-                                <td style="border: none; padding: 0.5rem 0; color: var(--text-primary);">
-                                    {% if medium.Owner %}
-                                        {{ medium.Owner.FirstName }} {{ medium.Owner.LastName }}
-                                    {% else %}
-                                        Non défini
-                                    {% endif %}
-                                </td>
-                            </tr>
                         </tbody>
                     </table>
                 </div>

@@ -16,11 +16,54 @@
             <h2 class="card-title">Modifier les Informations</h2>
         </div>
         <div class="card-body">
-            {{ include('media/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+            <form method="POST">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-label">Titre de l'album</label>
+                            <input type="text" name="title" class="form-control" value="{{ medium.Title }}" required>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-label">Nom du groupe</label>
+                            <input type="text" name="group_name" class="form-control" value="{{ medium.GroupName }}" required>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-label">Style musical</label>
+                            <input type="text" name="style" class="form-control" value="{{ medium.Style }}" required>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-label">Année de sortie</label>
+                            <input type="number" name="year" class="form-control" value="{{ medium.Year }}" required>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-label">Support</label>
+                            <input type="text" name="medium" class="form-control" value="{{ medium.Medium }}" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-between mt-4">
+                    <a href="{{ path('app_media_index') }}" class="btn btn-secondary">Annuler</a>
+                    <button type="submit" class="btn btn-primary">Mettre à jour</button>
+                </div>
+            </form>
         </div>
     </div>
 
     <div class="mt-4 text-center">
-        {{ include('media/_delete_form.html.twig') }}
+        <form method="POST" action="{{ path('app_media_delete', {'id': medium.id}) }}" style="display: inline;">
+            <button type="submit" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce média ?')">🗑️ Supprimer</button>
+        </form>
     </div>
 {% endblock %}

@@ -40,18 +40,6 @@
         </div>
     </div>
 
-    <div class="form-group">
-        {{ form_label(form.Owner, 'Propriétaire', {'label_attr': {'class': 'form-label'}}) }}
-        {{ form_widget(form.Owner, {'attr': {'class': 'form-control'}}) }}
-        {{ form_errors(form.Owner) }}
-    </div>
-
-    <div class="form-group">
-        {{ form_label(form.Borrower, 'Emprunteur (optionnel)', {'label_attr': {'class': 'form-label'}}) }}
-        {{ form_widget(form.Borrower, {'attr': {'class': 'form-control'}}) }}
-        {{ form_errors(form.Borrower) }}
-    </div>
-
     <div class="d-flex justify-content-between mt-4">
         <a href="{{ path('app_media_index') }}" class="btn btn-secondary">Annuler</a>
         <button class="btn btn-primary">{{ button_label|default('Enregistrer') }}</button>
