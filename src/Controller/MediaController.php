@@ -32,8 +32,16 @@ final class MediaController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // vérifier si l'utilisateur est connecté
             $user = $this->getUser();
-            // dd($medium, $user);
+            if ($user) {
+                $medium->setOwner($user);
+                // si il n'est pas connecté le redirige sur la page de connexion
+            } else {
+                $this->addFlash('error', 'Vous devez être connecté pour créer un média');
+                return $this->redirectToRoute('app_login');
+            }
+            //  dd($user);
 
             $entityManager->persist($medium);
             $entityManager->flush();

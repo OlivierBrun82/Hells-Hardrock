@@ -19,11 +19,10 @@ class MediaType extends AbstractType
             ->add('Style')
             ->add('Year')
             ->add('Medium')
-            // Owner ne peut pas être null
-            ->add('Owner', EntityType::class, [
-                'class' => User::class,
-                'choice_label' => 'id',
-            ])
+            // ->add('Owner', EntityType::class, [
+            //     'class' => User::class,
+            //     'choice_label' => 'id',
+            // ])
             // ->add('Borrower', EntityType::class, [
             //     'class' => User::class,
             //     'choice_label' => 'id',
