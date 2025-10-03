@@ -1,60 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Ajouter un Média - MetalVault{% endblock %}
+{% block title %}Hells Hardrock - Nouveau Média{% endblock %}
 
 {% block body %}
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1>🎸 Ajouter un Nouveau Média</h1>
-        <a href="{{ path('app_media_index') }}" class="btn btn-secondary">← Retour à la collection</a>
-    </div>
+<div class="container">
+    <h1 class="page-title">🎵 Ajouter un nouveau média</h1>
 
-    <div class="card rock-border">
-        <div class="card-header">
-            <h2 class="card-title">Informations du Média</h2>
-        </div>
-        <div class="card-body">
-            <form method="POST">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="form-label">Titre de l'album</label>
-                            <input type="text" name="title" class="form-control" placeholder="Ex: Nevermind" required>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="form-label">Nom du groupe</label>
-                            <input type="text" name="group_name" class="form-control" placeholder="Ex: Nirvana" required>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label class="form-label">Style musical</label>
-                            <input type="text" name="style" class="form-control" placeholder="Ex: Grunge" required>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label class="form-label">Année de sortie</label>
-                            <input type="number" name="year" class="form-control" placeholder="Ex: 1991" required>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label class="form-label">Support</label>
-                            <input type="text" name="medium" class="form-control" placeholder="Ex: CD, Vinyle, Cassette" required>
-                        </div>
-                    </div>
-                </div>
+    {{ include('media/_form.html.twig') }}
 
-                <div class="d-flex justify-content-between mt-4">
-                    <a href="{{ path('app_media_index') }}" class="btn btn-secondary">Annuler</a>
-                    <button type="submit" class="btn btn-primary">Enregistrer</button>
-                </div>
-            </form>
-        </div>
-    </div>
+    <a href="{{ path('app_media_index') }}" class="btn btn-secondary">Retour à la liste</a>
+</div>
 {% endblock %}

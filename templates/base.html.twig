@@ -1,41 +1,42 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html>
     <head>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>{% block title %}MetalVault - Collection Musicale{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>🎸</text></svg>">
+        <title>{% block title %}Hells Hardrock{% endblock %}</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+        <link rel="stylesheet" href="{{ asset('styles/app.css') }}">
         {% block stylesheets %}
-            {{ importmap('app') }}
         {% endblock %}
 
         {% block javascripts %}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
         {% endblock %}
     </head>
     <body>
-        <!-- Navigation -->
         <nav class="navbar">
             <div class="container">
-                <a href="{{ path('app_home') }}" class="navbar-brand">🎸 METALVAULT</a>
-                <ul class="navbar-nav">
-                    <li><a href="{{ path('app_home') }}" class="nav-link">Collection</a></li>
-                    <li><a href="{{ path('app_media_new') }}" class="nav-link">Ajouter un média</a></li>
-                </ul>
+                <a class="navbar-brand" href="{{ path('app_media_index') }}">🎸 Hells Hardrock</a>
+                <div class="navbar-nav">
+                    <a class="nav-link" href="{{ path('app_media_index') }}">Collection</a>
+                    <a class="nav-link" href="{{ path('app_media_new') }}">Ajouter</a>
+                    {% if app.user %}
+                        <a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a>
+                    {% else %}
+                        <a class="nav-link" href="{{ path('app_login') }}">Connexion</a>
+                        <a class="nav-link" href="{{ path('app_register') }}">Inscription</a>
+                    {% endif %}
+                </div>
             </div>
         </nav>
 
-        <!-- Contenu principal -->
-        <main class="container">
-            <div class="main-content">
+        <main class="main-content">
+            <div class="container">
                 {% block body %}{% endblock %}
             </div>
         </main>
 
-        <!-- Footer -->
         <footer class="footer">
             <div class="container">
-                <p>&copy; 2024 MetalVault -  Musicale Rock & Métal</p>
+                <p>&copy; 2024 Hells Hardrock - Votre collection Rock & Métal</p>
             </div>
         </footer>
     </body>

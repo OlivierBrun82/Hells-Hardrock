@@ -1,60 +1,52 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Collection Musicale - MetalVault{% endblock %}
+{% block title %}Hells Hardrock - Collection{% endblock %}
 
 {% block body %}
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1>🎸 Ma Collection Rock & Métal</h1>
-        <a href="{{ path('app_media_new') }}" class="btn btn-primary">+ Ajouter un Média</a>
-    </div>
-
-    {% if media|length > 0 %}
-        <div class="table-responsive">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Titre</th>
-                        <th>Groupe</th>
-                        <th>Style</th>
-                        <th>Année</th>
-                        <th>Support</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
+<div class="container">
+    <h1 class="page-title">🎸 Collection Hells Hardrock</h1>
+    
+    <div class="table-responsive">
+        <table class="table table-dark table-striped">
+            <thead>
+                <tr>
+                    <th>Titre</th>
+                    <th>Groupe</th>
+                    <th>Style</th>
+                    <th>Année</th>
+                    <th>Support</th>
+                    <th>Propriétaire</th>
+                    <th>Emprunteur</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
                 {% for medium in media %}
-                    <tr>
-                        <td class="text-muted">{{ medium.id }}</td>
-                        <td><strong>{{ medium.Title }}</strong></td>
-                        <td>{{ medium.GroupName }}</td>
-                        <td>
-                            <span class="badge" style="background: var(--primary-red); color: white; padding: 0.25rem 0.5rem; border-radius: 3px;">
-                                {{ medium.Style }}
-                            </span>
-                        </td>
-                        <td>{{ medium.Year }}</td>
-                        <td>{{ medium.Medium }}</td>
-                        <td>
-                            <div class="d-flex gap-2">
-                                <a href="{{ path('app_media_show', {'id': medium.id}) }}" class="btn btn-secondary" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">👁️ Voir</a>
-                                <a href="{{ path('app_media_edit', {'id': medium.id}) }}" class="btn btn-primary" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">✏️ Modifier</a>
-                            </div>
-                        </td>
-                    </tr>
+                <tr>
+                    <td>{{ medium.title }}</td>
+                    <td>{{ medium.groupName }}</td>
+                    <td>{{ medium.style }}</td>
+                    <td>{{ medium.year }}</td>
+                    <td>{{ medium.medium }}</td>
+                    <td>{{ medium.owner ? medium.owner.firstName ~ ' ' ~ medium.owner.lastName : 'N/A' }}</td>
+                    <td>{{ medium.borrower ? medium.borrower.firstName ~ ' ' ~ medium.borrower.lastName : 'Disponible' }}</td>
+                    <td>
+                        <a href="{{ path('app_media_show', {'id': medium.id}) }}" class="btn btn-sm btn-outline-primary">Voir</a>
+                        <a href="{{ path('app_media_edit', {'id': medium.id}) }}" class="btn btn-sm btn-outline-warning">Modifier</a>
+                        {{ include('media/_delete_form.html.twig') }}
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="8" class="text-center">Aucun média trouvé</td>
+                </tr>
                 {% endfor %}
-                </tbody>
-            </table>
-        </div>
-    {% else %}
-        <div class="text-center mt-5">
-            <div class="card">
-                <div class="card-body">
-                    <h3 class="card-title">🎵 Aucun média dans votre collection</h3>
-                    <p class="card-body">Commencez par ajouter votre premier album, CD ou vinyle !</p>
-                    <a href="{{ path('app_media_new') }}" class="btn btn-primary btn-lg">Ajouter mon premier média</a>
-                </div>
-            </div>
-        </div>
-    {% endif %}
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="text-center mt-4">
+        <a href="{{ path('app_media_new') }}" class="btn btn-primary btn-lg">🎵 Ajouter un nouveau média</a>
+    </div>
+</div>
 {% endblock %}
